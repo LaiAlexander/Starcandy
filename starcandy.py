@@ -154,8 +154,8 @@ CUMULATIVE_CANDY = {
     32: 142,
     32.5: 148,
     33: 154,
-    33: 162,
-    34.5: 170,
+    33.5: 162,
+    34: 170,
     34.5: 178,
     35: 186,
     35.5: 196,
@@ -181,7 +181,6 @@ def calc_cost(start_lvl, end_lvl):
     Returns:
         Stardust cost, candy cost
     """
-
     return (CUMULATIVE_STARDUST[end_lvl] - CUMULATIVE_STARDUST[start_lvl],
             CUMULATIVE_CANDY[end_lvl] - CUMULATIVE_CANDY[start_lvl])
 
@@ -192,7 +191,32 @@ def print_cost(stardust_cost, candy_cost):
     print("Stardust needed: " + str(stardust_cost) + "\n"
           "Candy needed: " + str(candy_cost) + "\n")
 
+def run():
+    """
+        Main function
+    """
+    while True:
+        start_lvl = input("Start level: ")
+        end_lvl = input("End level: ")
+        try:
+            start_lvl = float(start_lvl)
+            end_lvl = float(end_lvl)
+        except ValueError:
+            print("Input must be numbers.")
+        if isinstance(start_lvl, float) and isinstance(end_lvl, float):
+            if end_lvl >= start_lvl:
+                try:
+                    stardust_cost, candy_cost = calc_cost(start_lvl, end_lvl)
+                    print_cost(stardust_cost, candy_cost)
+                except KeyError:
+                    print("Start and end level must be between 1 and 40.")
+            else:
+                print("End level must be greater than start level.")
+
+        response = input("Calculate another? (y/n)")
+        print("")
+        if response == "n":
+            break
 
 if __name__ == "__main__":
-    star_cost, cand_cost = calc_cost(float(input("Start level: ")), float(input("End level: ")))
-    print_cost(star_cost, cand_cost)
+    run()
