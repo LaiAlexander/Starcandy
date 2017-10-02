@@ -182,10 +182,11 @@ def calc_cost(start_lvl, end_lvl):
     return (CUMULATIVE_STARDUST[end_lvl] - CUMULATIVE_STARDUST[start_lvl],
             CUMULATIVE_CANDY[end_lvl] - CUMULATIVE_CANDY[start_lvl])
 
-def print_cost(stardust_cost, candy_cost):
+def print_cost(stardust_cost, candy_cost, start_lvl, end_lvl):
     """
-        Prints the cost given.
+        Prints the cost and the level interval given.
     """
+    print("Level " + str(start_lvl) + "-" + str(end_lvl))
     print("Stardust needed: " + str(stardust_cost) + "\n"
           "Candy needed: " + str(candy_cost) + "\n")
 
@@ -212,11 +213,12 @@ def run():
     """
     print("\nCalculate stardust and candy cost given a level interval.")
     print("Enter levels as a number. Levels use half-steps (e.g lvl 1, lvl 1.5, lvl 2).")
-    print("You may also use 'min' or 'max' instead of entering a numerical value")
+    print("You may also use 'min' or 'max' instead of entering a numerical value.")
     print("min level is 1, max level is 39.\n")
     while True:
         start_lvl = input("Start level: ")
         end_lvl = input("End level: ")
+        print("")
 
         if start_lvl == "min" or start_lvl == "Min":
             start_lvl = 1
@@ -231,18 +233,18 @@ def run():
             start_lvl = float(start_lvl)
             end_lvl = float(end_lvl)
         except ValueError:
-            print("Input must be numbers.")
+            print("Input must be numbers.\n")
 
         if isinstance(start_lvl, float) and isinstance(end_lvl, float):
             if end_lvl >= start_lvl:
                 try:
                     stardust_cost, candy_cost = calc_cost(start_lvl, end_lvl)
-                    print_cost(stardust_cost, candy_cost)
+                    print_cost(stardust_cost, candy_cost, start_lvl, end_lvl)
                 except KeyError:
                     print("Start and end level must be between 1 and 39.")
-                    print("Levels must be a multiple of 0.5, e.g. 1, 1.5, 2, 2.5 etc.")
+                    print("Levels must be a multiple of 0.5, e.g. 1, 1.5, 2, 2.5 etc.\n")
             else:
-                print("End level must be greater than start level.")
+                print("End level must be greater than start level.\n")
 
         if not calculate_another():
             break
