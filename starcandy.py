@@ -2,6 +2,8 @@
     A short script to calculate stardust and candy cost when
     powering up Pokemon in Pokemon Go.
     Data pulled from https://pokemongo.gamepress.gg/power-up-costs
+    TODO
+    -Need correct error message if entering a number that's not %0.5
 """
 
 CUMULATIVE_STARDUST = {
@@ -83,8 +85,6 @@ CUMULATIVE_STARDUST = {
     38: 232000,
     38.5: 241000,
     39: 250000,
-    39.5: 260000,
-    40: 270000,
 }
 
 CUMULATIVE_CANDY = {
@@ -166,8 +166,6 @@ CUMULATIVE_CANDY = {
     38: 250,
     38.5: 262,
     39: 274,
-    39.5: 289,
-    40: 304,
 }
 
 def calc_cost(start_lvl, end_lvl):
@@ -209,7 +207,7 @@ def run():
                     stardust_cost, candy_cost = calc_cost(start_lvl, end_lvl)
                     print_cost(stardust_cost, candy_cost)
                 except KeyError:
-                    print("Start and end level must be between 1 and 40.")
+                    print("Start and end level must be between 1 and 39.")
             else:
                 print("End level must be greater than start level.")
 
