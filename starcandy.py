@@ -2,8 +2,6 @@
     A short script to calculate stardust and candy cost when
     powering up Pokemon in Pokemon Go.
     Data pulled from https://pokemongo.gamepress.gg/power-up-costs
-    TODO
-    -Need correct error message if entering a number that's not %0.5
 """
 
 CUMULATIVE_STARDUST = {
@@ -184,7 +182,7 @@ def calc_cost(start_lvl, end_lvl):
 
 def print_cost(stardust_cost, candy_cost, start_lvl, end_lvl):
     """
-        Prints the cost and the level interval given.
+        Prints the cost and the level range given.
     """
     print("Level " + str(start_lvl) + "-" + str(end_lvl))
     print("Stardust needed: " + str(stardust_cost) + "\n"
@@ -192,9 +190,9 @@ def print_cost(stardust_cost, candy_cost, start_lvl, end_lvl):
 
 def calculate_another():
     """
-        Determines whether the user wants to calculate the costs for another interval
+        Determines whether the user wants to calculate the costs for another range
 
-        Returns: True or False depending on the users choice
+        :Returns: True or False depending on the users choice
     """
     response = ""
     while response != "y" and response != "n":
@@ -207,11 +205,29 @@ def calculate_another():
         else:
             print("Please answer 'y' or 'n'\n")
 
+def convert_min_max_to_float(start_lvl, end_lvl):
+    """
+        Converts to proper float lvl if user entered 'min' or 'max'
+
+        :Args: The level range the user entered
+
+        :Returns: Proper level range if user entered 'min' or 'max'
+    """
+    if start_lvl == "min" or start_lvl == "Min":
+        start_lvl = 1
+    elif start_lvl == "max" or start_lvl == "Max":
+        start_lvl = 39
+    if end_lvl == "min" or end_lvl == "Min":
+        end_lvl = 1
+    elif end_lvl == "max" or end_lvl == "Max":
+        end_lvl = 39
+    return start_lvl, end_lvl
+
 def run():
     """
         Main function
     """
-    print("\nCalculate stardust and candy cost given a level interval.")
+    print("\nCalculate stardust and candy cost given a level range.")
     print("Enter levels as a number. Levels use half-steps (e.g lvl 1, lvl 1.5, lvl 2).")
     print("You may also use 'min' or 'max' instead of entering a numerical value.")
     print("min level is 1, max level is 39.\n")
@@ -220,14 +236,7 @@ def run():
         end_lvl = input("End level: ")
         print("")
 
-        if start_lvl == "min" or start_lvl == "Min":
-            start_lvl = 1
-        elif start_lvl == "max" or start_lvl == "Max":
-            start_lvl = 39
-        if end_lvl == "min" or end_lvl == "Min":
-            end_lvl = 1
-        elif end_lvl == "max" or end_lvl == "Max":
-            end_lvl = 39
+        start_lvl, end_lvl = convert_min_max_to_float(start_lvl, end_lvl)
 
         try:
             start_lvl = float(start_lvl)
