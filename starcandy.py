@@ -196,11 +196,22 @@ def run():
     while True:
         start_lvl = input("Start level: ")
         end_lvl = input("End level: ")
+
+        if start_lvl == "min":
+            start_lvl = 1
+        elif start_lvl == "max":
+            start_lvl = 39
+        if end_lvl == "min":
+            end_lvl = 1
+        elif end_lvl == "max":
+            end_lvl = 39
+
         try:
             start_lvl = float(start_lvl)
             end_lvl = float(end_lvl)
         except ValueError:
             print("Input must be numbers.")
+
         if isinstance(start_lvl, float) and isinstance(end_lvl, float):
             if end_lvl >= start_lvl:
                 try:
