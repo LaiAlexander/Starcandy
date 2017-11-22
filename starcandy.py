@@ -83,6 +83,8 @@ CUMULATIVE_STARDUST = {
     38: 232000,
     38.5: 241000,
     39: 250000,
+    39.5: 260000,
+    40: 270000,
 }
 
 CUMULATIVE_CANDY = {
@@ -164,6 +166,8 @@ CUMULATIVE_CANDY = {
     38: 250,
     38.5: 262,
     39: 274,
+    39.5: 289,
+    40: 304,
 }
 
 def calc_cost(start_lvl, end_lvl):
@@ -216,11 +220,11 @@ def convert_min_max_to_float(start_lvl, end_lvl):
     if start_lvl == "min" or start_lvl == "Min":
         start_lvl = 1
     elif start_lvl == "max" or start_lvl == "Max":
-        start_lvl = 39
+        start_lvl = 40
     if end_lvl == "min" or end_lvl == "Min":
         end_lvl = 1
     elif end_lvl == "max" or end_lvl == "Max":
-        end_lvl = 39
+        end_lvl = 40
     return start_lvl, end_lvl
 
 def run():
@@ -250,7 +254,7 @@ def run():
                     stardust_cost, candy_cost = calc_cost(start_lvl, end_lvl)
                     print_cost(stardust_cost, candy_cost, start_lvl, end_lvl)
                 except KeyError:
-                    print("Start and end level must be between 1 and 39.")
+                    print("Start and end level must be between 1 and 40.")
                     print("Levels must be a multiple of 0.5, e.g. 1, 1.5, 2, 2.5 etc.\n")
             else:
                 print("End level must be greater than start level.\n")
